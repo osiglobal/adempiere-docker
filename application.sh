@@ -11,7 +11,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #  Email: victor.perez@e-evolution.com, http://www.e-evolution.com , http://github.com/e-Evolution
 
-#!/usr/bin/env bash
+#!/usr/bin/env bash  -x
 BASE_DIR=$(cd "$(dirname "$0")"; pwd)
 
 if [ -z "$1" ];
