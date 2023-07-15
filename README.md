@@ -23,51 +23,68 @@ following command:
 docker info
 ```
 
-The expected output is as follow
+The expected output is as follows
 
 ```
-Containers: 4
- Running: 2
- Paused: 0
- Stopped: 2
-Images: 69
-Server Version: 17.04.0-ce
-Storage Driver: aufs
- Root Dir: /var/lib/docker/aufs
- Backing Filesystem: extfs
- Dirs: 114
- Dirperm1 Supported: false
-Logging Driver: json-file
-Cgroup Driver: cgroupfs
-Plugins:
- Volume: local
- Network: bridge host macvlan null overlay
-Swarm: inactive
-Runtimes: runc
-Default Runtime: runc
-Init Binary:
-containerd version: 422e31ce907fd9c3833a38d7b8fdd023e5a76e73
-runc version: 9c2d8d184e5da67c95d601382adf14862e4f2228
-init version: 949e6fa
-Security Options:
- apparmor
-Kernel Version: 3.13.0-24-generic
-Operating System: Ubuntu 14.04.5 LTS
-OSType: linux
-Architecture: x86_64
-CPUs: 2
-Total Memory: 7.675GiB
-Name: cub8
-ID: SZGL:IHMR:NBGN:MCIE:SWOK:TO5N:FBML:W5IW:BPRR:C2DP:WZLQ:S75V
-Docker Root Dir: /var/lib/docker
-Debug Mode (client): false
-Debug Mode (server): false
-Username: sramazzina
-Registry: https://index.docker.io/v1/
-Experimental: false
-Insecure Registries:
- 127.0.0.0/8
-Live Restore Enabled: false
+Client: Docker Engine - Community
+ Version:    24.0.3
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.11.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.19.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 15
+  Running: 14
+  Paused: 0
+  Stopped: 1
+ Images: 18
+ Server Version: 24.0.3
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 3dce8eb055cbb6872793272b4f20ed16117344f8
+ runc version: v1.1.7-0-g860f061
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 5.15.0-1038-oracle
+ Operating System: Ubuntu 22.04.2 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 15.61GiB
+ Name: live.thelinuxtrainer.com
+ ID: 7de153af-02ab-4d13-90d4-342cdee9662a
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
+
 ```
 
 To verify the Docker version you're running on your server look at the _Server Version_ property.
@@ -90,12 +107,12 @@ The adempiere-docker project follows the structure specified below
    ├─ adempiere-last
    ├─ tenant1
    |  ├─ .env
-   |  ├─ Adempiere_391LTS.tar.gz
+   |  ├─ Adempiere_394LTS.tar.gz
    |  ├─ lib
    |  └─ packages
    └─ tenant2
    |  ├─ .env   
-   |  ├─ Adempiere_391LTS.tar.gz
+   |  ├─ Adempiere_394LTS.tar.gz
    |  ├─ lib
    |  └─ packages
    ...
