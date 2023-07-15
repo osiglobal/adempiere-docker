@@ -16,7 +16,7 @@ version: '3.5'
 services:
   adempiere-tenant:
     networks:
-      - custom
+      - adempiere_network
     external_links:
       - db:db
     image: "${COMPOSE_PROJECT_NAME}" # Name of the instance for docker create based on project name
@@ -39,5 +39,6 @@ services:
         ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_DB_PASSWORD}
         ADEMPIERE_DB_ADMIN_PASSWORD: ${ADEMPIERE_DB_ADMIN_PASSWORD}
 networks:
-  custom:
+  adempiere_network:
+  name: proxy_swag_network
     external: true
