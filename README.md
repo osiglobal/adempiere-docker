@@ -16,14 +16,14 @@ with the maintenance of an official image for ADempiere.
 
 To use this Docker image you must have your Docker engine release number greater
 than or equal to 3.0.
-To check the version of your Docker installation, a terminal window and type the
-following command:
+To check the version of your Docker installation, open a terminal window and type the
+the following command:
 
 ```
 docker info
 ```
 
-The expected output is as follows
+The expected output is as follows:
 
 ```
 Client: Docker Engine - Community
@@ -121,7 +121,7 @@ The adempiere-docker project follows the structure specified below
 ```
 #### .env file
 
-This file contains the setting variables to Tenant deployment
+This file contains the setting variables for Tenant deployment
 
 ```
 ADEMPIERE_DB_PORT=55432
@@ -132,24 +132,24 @@ tenant/.env
 ```
 ADEMPIERE_WEB_PORT=8277
 ADEMPIERE_SSL_PORT=4444
-ADEMPIERE_VERSION=3.9.1
-# ATENTION If is "Y" it will be replace de actual defined database with a empty ADempiere seed
+ADEMPIERE_VERSION=3.9.4
+# ATENTION If is "Y" it will be replace the actually defined database with an empty ADempiere seed
 ADEMPIERE_DB_INIT=Y 
 
 ```
 
-#### tenant dierectory
+#### tenant directory
 
 This directory contains the files needed to deploy and start a particular ADempiere instance of a tenant.
 Here we will find:
-* The Adempiere tar.gz installer,  if not exist then this will be download from the last stable version.
-* lib: The files to copy to the lib directory on ADempiere (this directory will contain the customization and zkcustomization of ADempiere.
+* The Adempiere tar.gz installer,  if not exist then will be downloaded from the last stable version.
+* lib: The files to copy to the lib directory on ADempiere (this directory will contain the customization and zk-customization of ADempiere.
 * packages: The files to copy to the packages directory on ADempiere (this directory will contain the localization of an ADempiere).
 
 
 ### database.volume.yml
 
-this file will contain the an external database volume 
+this file will contain an external database volume 
 
 ```
 version: '2.0'
@@ -170,7 +170,7 @@ this file will contain the PostgreSQL deployment
 version: '2.0'
 services:
   database:
-    image: postgres:11.1
+    image: postgres:15.1
     ports:
       - "${ADEMPIERE_DB_PORT}:5432"
     volumes:
@@ -190,15 +190,13 @@ volumes:
 
 networks:
   custom:
-    external : true   
+    external: true   
 ```      
-
-
 
 ### adempiere.yml
 
 This file will contain the definition of our ADempiere clients.
-For a client we will need to complete the next parametrization.
+For a client, we will need to complete the next parametrization.
 
 ```
 version: '2.0'
@@ -207,8 +205,8 @@ services:
     networks:
       - custom
     external_links:
-      - database:database
-    image: "${COMPOSE_PROJECT_NAME}" # Name of the instance for docker create based on project name
+      - database: database
+    image: "${COMPOSE_PROJECT_NAME}" # Name of the instance for docker create based on the project name
     container_name: "${COMPOSE_PROJECT_NAME}" # Name of the ADempiere client container
     ports:
       - ${ADEMPIERE_WEB_PORT}:8888 # http port where the web client will be exposed
@@ -220,7 +218,7 @@ services:
       dockerfile: ./adempiere-last/Dockerfile
       args:
         ADEMPIERE_BINARY : ${ADEMPIERE_BINARY}
-        ADEMPIERE_SRC_DIR: "./${COMPOSE_PROJECT_NAME}" # Directory that contain the ADempiere installer, customization and localization
+        ADEMPIERE_SRC_DIR: "./${COMPOSE_PROJECT_NAME}" # Directory that contains the ADempiere installer, customization, and localization
         ADEMPIERE_DB_HOST: "database"
         ADEMPIERE_DB_PORT: 5432
         ADEMPIERE_DB_NAME: "${COMPOSE_PROJECT_NAME}"
@@ -233,32 +231,32 @@ networks:
 ```
 
 ### Postgres Container
-If you don't have an external database server, You can use the postgres server container defined in this composer. As you will not have a database defined in the container, you can first start the database container to mount it, or you can pass the ADEMPIERE_DB_INIT argument with "Y" to load an ADempiere seed, then you only need to parametrice your ADempiere instances with this database configuration.
+If you don't have an external database server, You can use the Postgres server container defined in this composer. As you will not have a database defined in the container, you can first start the database container to mount it, or you can pass the ADEMPIERE_DB_INIT argument with "Y" to load an ADempiere seed, then you only need to parametrize your ADempiere instances with this database configuration.
 
 ### Usage
 
-Edit and define the parameters for new instance
+Edit and define the parameters for the new instance
 
 ```
 nano .env 
 nano ./eevolution/.env
 ```
 
-to do this in terminal we will run the next line:
+to do this in the terminal we will run the next line:
 
-note : eevolution is the name for new tenant
+note: evolution is the name for a new tenant
 
 ```
 ./application.sh eevolution up -d 
 ```
 
 
-This command will build the images defined in the .env, create the containers and start them. The "-d" parameter will launch the process in background.
+This command will build the images defined in the .env, create the containers and start them. The "-d" parameter will launch the process in the background.
 To stop the containers you will run the next command.
 ```
 ./application.sh eevolution stop
 ```
-Note that in the above command we use the instruction ```stop``` insted of ```down```, this is because the ```down``` instruction delete the containers to, ```stop``` only shutdown them.
+Note that in the above command, we use the instruction ```stop'' instead of ```down```, this is because the ```down``` instruction deletes the containers to, ```stop``` only shutdown them.
 
 If you have a new tenant, you only need to edit and setting the tenant definition to tenant/.env file and start up only this image and container.
 
@@ -266,14 +264,14 @@ If you have a new tenant, you only need to edit and setting the tenant definitio
 ./application.sh eevolution up -d 
 ```
 
-If you need a backup from Database using 
+If you need a backup from a Database using 
 
 Generate backup : 
 
 ```
 ./application.sh eevolution exec adempiere-tenant /opt/Adempiere/utils/RUN_DBExport.sh
 ```
-Ge backup zip :
+Get backup zip :
 
 ```
 ./application.sh eevolution exec adempiere-tenant "cat /opt/Adempiere/data/ExpDat.dmp" \ 
