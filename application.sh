@@ -30,13 +30,13 @@ echo "Instance $COMPOSE_PROJECT_NAME"
 
 if [ -z "$ADEMPIERE_WEB_PORT" ];
 then
-    echo "ADempiere HTTP port not setting"
+    echo "ADempiere HTTP port not set"
     exit 1
 fi
 
 if [ -z "$ADEMPIERE_SSL_PORT" ];
 then
-    echo "ADempiere HTTPS port not setting"
+    echo "ADempiere HTTPS port not set"
     exit 1
 fi
 
@@ -48,7 +48,7 @@ fi
 
 if [ -z "$ADEMPIERE_VERSION" ];
 then
-    echo "ADempiere version not setting"
+    echo "ADempiere version not set"
     exit 1
 fi
 
@@ -61,7 +61,7 @@ echo "ADempiere HTTPS port: $ADEMPIERE_SSL_PORT"
 echo "Initialize Database $ADEMPIERE_DB_INIT"
 
 
-if [ "$(docker network inspect -f '{{.Name}}' custom)" != "custom" ];
+if [ "$(docker network inspect -f '{{.Name}}' adempiere_network)" != "adempiere_network" ];
 then
     echo "Create custom network"
     docker network create -d bridge custom
@@ -138,5 +138,5 @@ then
             $4 \
             $5
 else
-    echo "Project directory not found for : $COMPOSE_PROJECT_NAME "
+    echo "Project directory not found for: $COMPOSE_PROJECT_NAME "
 fi
