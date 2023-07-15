@@ -25,13 +25,13 @@ services:
       - ${ADEMPIERE_WEB_PORT}:8888 # http port where the web client will be exposed
       - ${ADEMPIERE_SSL_PORT}:4444 # https port where the web client will be exposed
     environment:
-      ADEMPIERE_DB_INIT: ${ADEMPIERE_DB_INIT} # ATENTION If is "Y" it will be replace de actual defined database with a empty ADempiere seed
+      ADEMPIERE_DB_INIT: ${ADEMPIERE_DB_INIT} # ATENTION If is "Y" it will replace de actual defined database with an empty ADempiere seed
     build:
       context: .
       dockerfile: ./adempiere-last/Dockerfile
       args:
         ADEMPIERE_BINARY : ${ADEMPIERE_BINARY}
-        ADEMPIERE_SRC_DIR: "./${COMPOSE_PROJECT_NAME}" # Directory that contain the ADempiere installer, customization and localization
+        ADEMPIERE_SRC_DIR: "./${COMPOSE_PROJECT_NAME}" # Directory that contains the ADempiere installer, customization, and localization
         ADEMPIERE_DB_HOST: "${ADEMPIERE_DB_SERVER}"
         ADEMPIERE_DB_PORT: 5432
         ADEMPIERE_DB_NAME: "${COMPOSE_PROJECT_NAME}"
