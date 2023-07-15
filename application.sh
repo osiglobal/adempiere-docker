@@ -98,7 +98,7 @@ then
         config
 fi
 
-export DB_CONTAINER_ID=$(docker inspect --format="{{.Id}}" postgres${PG_VERSION//.}_db_1)
+export DB_CONTAINER_ID=$(docker inspect --format="{{.Id}}" postgres${PG_VERSION//.}-db-1)
 # Define Adempiere path and binary
 export ADEMPIERE_DB_SERVER=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $DB_CONTAINER_ID)
 echo "Database Host: $ADEMPIERE_DB_SERVER"
