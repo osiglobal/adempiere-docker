@@ -40,5 +40,5 @@ services:
         ADEMPIERE_DB_ADMIN_PASSWORD: ${ADEMPIERE_DB_ADMIN_PASSWORD}
 networks:
   adempiere_network:
-  name: proxy_swag_network
+    name: proxy_swag_network
     external: true
