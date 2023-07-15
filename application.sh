@@ -63,8 +63,8 @@ echo "Initialize Database $ADEMPIERE_DB_INIT"
 
 if [ "$(docker network inspect -f '{{.Name}}' adempiere_network)" != "adempiere_network" ];
 then
-    echo "Create custom network"
-    docker network create -d bridge custom
+    echo "Create adempiere_network network"
+    docker network create -d bridge adempiere_network
 fi
 
 RUNNING=$(docker inspect --format="{{.State.Running}}" postgres${PG_VERSION//.}_db_1 2> /dev/null)
