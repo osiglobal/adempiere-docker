@@ -21,7 +21,7 @@ services:
     volumes:
       - db:/var/lib/postgresql/${PG_VERSION}/data
     networks:
-      - custom
+      - adempiere_network
     environment:
       - POSTGRES_USER:postgres
       - POSTGRES_PASSWORD:'${ADEMPIERE_DB_ADMIN_PASSWORD}'
@@ -31,9 +31,10 @@ services:
       - POSTGRES_INITDB_XLOGDIR:''
 
 volumes:
- db:
-  external: true
+  db:
+    external: true
 
 networks:
-  custom:
-    external : true
+  adempiere_network:
+  name: proxy_swag_network
+    external: true
