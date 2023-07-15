@@ -61,11 +61,11 @@ echo "ADempiere HTTPS port: $ADEMPIERE_SSL_PORT"
 echo "Initialize Database $ADEMPIERE_DB_INIT"
 
 
-#if [ "$(docker network inspect -f '{{.Name}}' adempiere_network)" != "adempiere_network" ];
-#then
-#    echo "Create adempiere_network network"
-#    docker network create -d bridge adempiere_network
-# fi
+if [ "$(docker network inspect -f '{{.Name}}' adempiere_network)" != "adempiere_network" ];
+then
+  echo "Create adempiere_network network"
+  docker network create -d bridge adempiere_network
+fi
 
 RUNNING=$(docker inspect --format="{{.State.Running}}" postgres${PG_VERSION//.}-db-1 2> /dev/null)
 if [ $? -eq 1 ]; then
