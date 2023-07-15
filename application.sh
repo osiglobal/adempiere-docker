@@ -67,9 +67,9 @@ echo "Initialize Database $ADEMPIERE_DB_INIT"
 #    docker network create -d bridge adempiere_network
 # fi
 
-RUNNING=$(docker inspect --format="{{.State.Running}}" postgres${PG_VERSION//.}_db_1 2> /dev/null)
+RUNNING=$(docker inspect --format="{{.State.Running}}" postgres${PG_VERSION//.}-db-1 2> /dev/null)
 if [ $? -eq 1 ]; then
-  echo "Dababase container does not exist."
+  echo "Database container does not exist."
   echo "Create Database container"
     docker-compose \
         -f "$BASE_DIR/database.yml" \
@@ -80,7 +80,7 @@ fi
 
 if [ "$RUNNING" == "false" ];
 then
-echo "CRITICAL - postgres${PG_VERSION//.}_db_1 is not running."
+echo "CRITICAL - postgres${PG_VERSION//.}-db-1 is not running."
 echo "Starting Database"
 docker-compose \
     -f "$BASE_DIR/database.yml" \
@@ -123,7 +123,7 @@ then
        then
          echo "Adempiere Binary download successful"
        else
-              "Adempiere Binary not download"
+              "Adempiere Binary not downloaded"
               exit
        fi
     fi
@@ -138,5 +138,5 @@ then
             $4 \
             $5
 else
-    echo "Project directory not found for: $COMPOSE_PROJECT_NAME "
+    echo "Project directory not found for $COMPOSE_PROJECT_NAME"
 fi
